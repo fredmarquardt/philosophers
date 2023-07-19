@@ -1,8 +1,8 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
-SOURCE = main.c
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+SOURCE = main.c create_philos.c allocate_free.c
 OBJ = $(SOURCE:.c=.o)
-NAME = push_swap
+NAME = philo
 FTPRINTF	= ./ft_printf/libftprintf.a
 LIBFT		= ./libft/libft.a
 
