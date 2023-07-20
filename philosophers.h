@@ -6,7 +6,7 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:02:45 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/07/19 16:45:01 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/07/20 14:00:53 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,26 @@
 
 typedef struct s_philos
 {
-	int				id;
-	int				phil_id[SEATS];
-	int				fork_id[SEATS];
-	pthread_mutex_t	m_fork[SEATS];
+	int				phil_id;
+	int				fork_id[2];
 }	t_philos;
 
 typedef struct s_table
 {
-	time_t		start;
-	bool		even_seats;
+	time_t			start;
+	t_philos		philo[SEATS];
+	pthread_mutex_t	m_fork[SEATS];
+	bool			even_seats;
+	int				seats_taken;
 }	t_table;
 
 //allocate_free.c
 t_philos	*alloc_philo(void);
 t_table		*allocate_table(void);
+void		init_mutex_fork(pthread_mutex_t *m_fork);
 
 //create_philos.c
-void		create_philo(t_philos *philos);
+void		create_philo(t_table *table);
 void		*routine(void *arg);
 
 #endif

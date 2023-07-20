@@ -6,7 +6,7 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:01:08 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/07/19 15:50:14 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:16:47 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ int	main(void)
 
 	table = allocate_table();
 	philos = alloc_philo();
-	create_philo(philos);
+	//create_philo(table);
 	get_start_date(table);
 	usleep(2000000);
 	delta = get_now_date(table);
-
+	for (int i = 0; i < SEATS; i++)
+		pthread_mutex_destroy(&(table->m_fork[i]));
 	printf("TIME: %ld\n", delta);
 	return (0);
 }
