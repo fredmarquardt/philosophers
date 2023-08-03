@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
-SOURCE = main.c create_philos.c allocate_free.c
+SOURCE = main.c create_philos.c tischlein_deck_dich.c eat_sleep_repeat.c clean_table.c utils.c
 OBJ = $(SOURCE:.c=.o)
 NAME = philo
 FTPRINTF	= ./ft_printf/libftprintf.a
@@ -8,7 +8,7 @@ LIBFT		= ./libft/libft.a
 
 all: $(NAME)
 
-$(NAME):  $(FTPRINTF) $(LIBFT) $(OBJ)
+$(NAME): $(FTPRINTF) $(LIBFT) $(OBJ)
 	$(CC) $(SOURCE) $(CFLAGS) $(FTPRINTF) $(LIBFT) -o $(NAME)
 
 $(FTPRINTF):

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocate_free.c                                    :+:      :+:    :+:   */
+/*   tischlein_deck_dich.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 07:51:26 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/07/20 13:20:17 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:22:18 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,25 @@ t_table	*allocate_table(void)
 	if (table == NULL)
 		return (NULL);
 	table->start = 0;
+	table->dead_philo = false;
 	table->even_seats = false;
-	init_mutex_fork(table->m_fork);
+	table->seats_taken = 10;
+	table->tteat = 200;
+	table->ttsleep = 200;
+	table->ttdie = 500;
 	return (table);
 }
 
-void	init_mutex_fork(pthread_mutex_t *m_fork)
+void	init_mutex_fork(t_table *table)
 {
 	int	i;
 
 	i = 0;
-	while (i < SEATS)
+	while (i < table->seats_taken)
 	{
-		pthread_mutex_init(&m_fork[i], NULL);
-		printf("Gabel %i Initialisert\n", i);
+		pthread_mutex_init(&table->fork[i], NULL);
+		pthread_mutex_init(&table->philo[i].meal_time, NULL);
+		printf("Gabel %i Initialisert\n", i + 1);
 		i++;
 	}
 	return ;
