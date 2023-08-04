@@ -6,7 +6,7 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:02:45 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/08/03 17:13:15 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/08/04 08:46:01 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_table
 	t_philos		philo[SEATS];
 	pthread_mutex_t	fork[SEATS];
 	pthread_t		p_fred[SEATS];
+	pthread_mutex_t	dead_lock;
 	bool			even_seats;
 	bool			dead_philo;
 	int				id_counter;

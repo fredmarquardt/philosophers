@@ -6,7 +6,7 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:05:53 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/08/03 17:39:19 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/08/04 09:58:48 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	*cycle(void *arg)
 		i++;
 	}
 	print_status(philo, DEAD);
+	pthread_mutex_lock(&philo->table->dead_lock);
 	philo->table->dead_philo = true;
+	printf("DEATH Status:%i\n", philo->table->dead_philo);
+	pthread_mutex_lock(&philo->table->dead_lock);
 	return (NULL);
 }
 
