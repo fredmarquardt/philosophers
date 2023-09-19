@@ -3,23 +3,11 @@ CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 SOURCE = main.c create_philos.c tischlein_deck_dich.c eat_sleep_repeat.c clean_table.c utils.c
 OBJ = $(SOURCE:.c=.o)
 NAME = philo
-FTPRINTF	= ./ft_printf/libftprintf.a
-LIBFT		= ./libft/libft.a
 
 all: $(NAME)
 
-$(NAME): $(FTPRINTF) $(LIBFT) $(OBJ)
-	$(CC) $(SOURCE) $(CFLAGS) $(FTPRINTF) $(LIBFT) -o $(NAME)
-
-$(FTPRINTF):
-	@git submodule init ft_printf
-	@git submodule update ft_printf
-	@cd ft_printf && make && make clean
-
-$(LIBFT):
-	@git submodule init libft
-	@git submodule update libft
-	@cd libft && make && make clean
+$(NAME): $(OBJ)
+	$(CC) $(SOURCE) $(CFLAGS) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)

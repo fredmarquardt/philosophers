@@ -6,7 +6,7 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 11:05:53 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/08/04 09:58:48 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:20:14 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*cycle(void *arg)
 
 	philo = arg;
 	i = 1;
-	while (i < 3)
+	while (i < 5)
 	{
 		eating(philo);
 		sleeping(philo);
@@ -29,7 +29,7 @@ void	*cycle(void *arg)
 	print_status(philo, DEAD);
 	pthread_mutex_lock(&philo->table->dead_lock);
 	philo->table->dead_philo = true;
-	printf("DEATH Status:%i\n", philo->table->dead_philo);
+	printf("ENDE DEATH Status:%i\n", philo->table->dead_philo);
 	pthread_mutex_lock(&philo->table->dead_lock);
 	return (NULL);
 }

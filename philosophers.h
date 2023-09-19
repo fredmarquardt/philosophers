@@ -6,7 +6,7 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:02:45 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/08/04 08:46:01 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:34:41 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <sys/time.h>
-# include "./ft_printf/ft_printf.h"
-# include "./libft/libft.h"
 
 # define FALSE 0
 # define TRUE 1
-# define SEATS 10
+# define SEATS 9
 # define FORK 0
 # define EAT 1
 # define SLEEP 2
@@ -51,6 +49,7 @@ typedef struct s_table
 	t_philos		philo[SEATS];
 	pthread_mutex_t	fork[SEATS];
 	pthread_t		p_fred[SEATS];
+	pthread_mutex_t	print;
 	pthread_mutex_t	dead_lock;
 	bool			even_seats;
 	bool			dead_philo;
@@ -68,6 +67,7 @@ void		check_health(t_table *table);
 t_philos	*alloc_philo(void);
 t_table		*allocate_table(void);
 void		init_mutex_fork(t_table *table);
+void		init_mutex_table(t_table *table);
 
 //create_philos.c
 void		create_philo_threads(t_table *table);
