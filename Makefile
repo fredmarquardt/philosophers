@@ -1,6 +1,7 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
-SOURCE = main.c create_philos.c tischlein_deck_dich.c eat_sleep_repeat.c clean_table.c utils.c
+CFLAGS = -Wall -Werror -Wextra -fsanitize=thread -g #-lpthread
+SOURCE = main.c create_philos.c tischlein_deck_dich.c eat_sleep_repeat.c clean_table.c utils.c \
+	parsing.c single_philo.c
 OBJ = $(SOURCE:.c=.o)
 NAME = philo
 

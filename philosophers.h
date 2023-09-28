@@ -6,7 +6,7 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:02:45 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/09/19 16:34:41 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:34:52 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define SLEEP 2
 # define THINK 3
 # define DEAD 4
+# define ALIVE 5
 
 typedef struct s_table	t_table;
 
@@ -51,6 +52,7 @@ typedef struct s_table
 	pthread_t		p_fred[SEATS];
 	pthread_mutex_t	print;
 	pthread_mutex_t	dead_lock;
+	pthread_mutex_t	time_lock;
 	bool			even_seats;
 	bool			dead_philo;
 	int				id_counter;
@@ -58,6 +60,7 @@ typedef struct s_table
 	int				ttsleep;
 	int				tteat;
 	int				ttdie;
+	int				ms;
 }	t_table;
 
 //main.c
@@ -65,7 +68,7 @@ void		check_health(t_table *table);
 
 //tischlein_deck_dich.c
 t_philos	*alloc_philo(void);
-t_table		*allocate_table(void);
+t_table		*allocate_table(int argc, char *argv[]);
 void		init_mutex_fork(t_table *table);
 void		init_mutex_table(t_table *table);
 
@@ -80,6 +83,7 @@ void		sleeping(t_philos *philo);
 void		thinking(t_philos *philo);
 void		grab_fork(t_philos *philo);
 void		release_fork(t_philos *philo);
+int			a_philo_is_dead(t_philos *philo);
 
 //clean_table.c
 void		all_clean(t_table *table);
@@ -87,9 +91,19 @@ void		join_threads(t_table *table);
 void		destroy_mutex_fork(t_table *table);
 void		free_table(t_table *table);
 
+//parsing.c
+int			correct_args(int argc, char *argv[]);
+int			correct_input(const char *arg);
+
 //utils.c
 void		print_status(t_philos *philo, int task);
 time_t		get_time_stamp(void);
 void		do_philo_stuff(int time_in_ms);
+size_t		ft_isaldigit(const char *str);
+size_t		ft_strlen(const char *str);
+int			ft_atoi(const char *str);
+
+//single_philos.c
+void		single_philo(t_philos *philo);
 
 #endif
