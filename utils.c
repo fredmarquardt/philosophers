@@ -6,7 +6,7 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 10:21:50 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/09/28 11:28:28 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:02:27 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,6 @@ size_t	ft_strlen(const char *str)
 		i++;
 	}
 	return (i);
-}
-
-time_t	get_time_stamp(void)
-{
-	time_t			sec;
-	time_t			micro_sec;
-	struct timeval	current_time;
-
-	if (gettimeofday(&current_time, NULL) < 0)
-		return (0);
-	sec = current_time.tv_sec * 1000;
-	micro_sec = current_time.tv_usec / 1000;
-	return (sec + micro_sec);
 }
 
 void	do_philo_stuff(int time_in_ms)

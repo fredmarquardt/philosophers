@@ -6,7 +6,7 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:20:41 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/09/21 14:00:07 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:40:18 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	correct_args(int argc, char *argv[])
 		printf("Wrong number of arguments!\n");
 		return (FALSE);
 	}
+	if (ft_atoi(argv[1]) > 200)
+		return (FALSE);
 	while (i < argc)
 	{
 		if (correct_input(argv[i]) == FALSE)

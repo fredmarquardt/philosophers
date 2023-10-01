@@ -6,7 +6,7 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:02:45 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/09/28 13:34:52 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:06:34 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define FALSE 0
 # define TRUE 1
-# define SEATS 9
+# define SEATS 200
 # define FORK 0
 # define EAT 1
 # define SLEEP 2
@@ -65,6 +65,7 @@ typedef struct s_table
 
 //main.c
 void		check_health(t_table *table);
+time_t		get_time_stamp(void);
 
 //tischlein_deck_dich.c
 t_philos	*alloc_philo(void);
@@ -75,15 +76,15 @@ void		init_mutex_table(t_table *table);
 //create_philos.c
 void		create_philo_threads(t_table *table);
 void		give_fork_pls(t_table *table);
+void		*cycle(void *arg);
+int			a_philo_is_dead(t_philos *philo);
 
 //eat_sleep_repeat.c
-void		*cycle(void *arg);
 void		eating(t_philos *philo);
 void		sleeping(t_philos *philo);
 void		thinking(t_philos *philo);
 void		grab_fork(t_philos *philo);
 void		release_fork(t_philos *philo);
-int			a_philo_is_dead(t_philos *philo);
 
 //clean_table.c
 void		all_clean(t_table *table);
@@ -97,7 +98,6 @@ int			correct_input(const char *arg);
 
 //utils.c
 void		print_status(t_philos *philo, int task);
-time_t		get_time_stamp(void);
 void		do_philo_stuff(int time_in_ms);
 size_t		ft_isaldigit(const char *str);
 size_t		ft_strlen(const char *str);

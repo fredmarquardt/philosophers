@@ -6,13 +6,13 @@
 /*   By: fmarquar <fmarquar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:01:08 by fmarquar          #+#    #+#             */
-/*   Updated: 2023/09/27 16:07:06 by fmarquar         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:36:32 by fmarquar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char *argv[])
+int	main2(int argc, char *argv[])
 {
 	t_table		*table;
 	bool		dead;
@@ -37,6 +37,13 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
+int	main(int argc, char *argv[])
+{
+	main2(argc, argv);
+	system("leaks philo");
+	return (0);
+}
+
 void	check_health(t_table *table)
 {
 	int		i;
@@ -44,7 +51,7 @@ void	check_health(t_table *table)
 
 	i = 0;
 	hungry = 0;
-	while (i < table->seats_taken) // && table->dead_philo == FALSE)
+	while (i < table->seats_taken)
 	{
 		pthread_mutex_lock(&table->philo[i].meal_time);
 		hungry = get_time_stamp() - table->philo[i].last_meal;
@@ -53,10 +60,22 @@ void	check_health(t_table *table)
 		{
 			print_status(&table->philo[i], DEAD);
 			pthread_mutex_lock(&table->dead_lock);
-			printf("Status %p\n", &table->dead_lock);
 			table->dead_philo = TRUE;
 			pthread_mutex_unlock(&table->dead_lock);
 		}
 		i++;
 	}
+}
+
+time_t	get_time_stamp(void)
+{
+	time_t			sec;
+	time_t			micro_sec;
+	struct timeval	current_time;
+
+	if (gettimeofday(&current_time, NULL) < 0)
+		return (0);
+	sec = current_time.tv_sec * 1000;
+	micro_sec = current_time.tv_usec / 1000;
+	return (sec + micro_sec);
 }
